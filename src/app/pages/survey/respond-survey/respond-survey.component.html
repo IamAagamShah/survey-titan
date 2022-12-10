@@ -1,0 +1,61 @@
+<div class="parent">
+  <div class="row">
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h2 class="panel-title">{{surveyTitle}}</h2>
+      </div>
+      <div *ngIf="serviceResponse.length>0" class="alert alert-success alert-dismissible fade show" role="alert">
+        {{serviceResponse}}
+        <button type="button" class="close" (click)="dismiss()" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="panel-body">
+        <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
+          <div class="form-group" *ngFor="let form_elem of formtemplate">
+            <div [ngSwitch]="form_elem.type | lowercase ">
+
+              <div *ngSwitchCase="'textbox'">
+                <mat-form-field class="example-full-width">
+                  <mat-label>{{form_elem.question}}</mat-label>
+                  <input matInput formControlName="{{form_elem.controlName}}">
+                  <mat-error *ngIf="surveyForm.invalid">This is required</mat-error>
+                </mat-form-field>
+              </div>
+              <div *ngSwitchCase="'datepicker'">
+                <mat-form-field appearance="fill" style="width:25vw">
+                  <mat-label>{{form_elem.question}}</mat-label>
+                  <input matInput [matDatepicker]="picker" formControlName="{{form_elem.controlName}}">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error *ngIf="surveyForm.invalid">This is required</mat-error>
+                </mat-form-field>
+              </div>
+              <div *ngSwitchCase="'dropdown'">
+                <mat-form-field appearance="fill" style="width:25vw">
+                  <mat-label>{{form_elem.question}}</mat-label>
+                  <mat-select formControlName="{{form_elem.controlName}}">
+                    <mat-option *ngFor="let option of form_elem.options" value={{option}}>{{option}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="surveyForm.invalid">This is required</mat-error>
+                </mat-form-field>
+              </div>
+              <div *ngSwitchCase="'radio button'">
+                <mat-label appearance="fill">{{form_elem.question}}</mat-label>
+                <mat-radio-group aria-label="Select an option"
+                appearance="fill" style="width:25vw" class="radio-group" formControlName="{{form_elem.controlName}}">
+                  <mat-radio-button *ngFor="let option of form_elem.options" value={{option}}>{{option}}
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+          </div>
+          <button class="example-button-row" type="submit" mat-raised-button style="width:7vw" color="accent">Respond</button>
+          <button mat-raised-button style="width:7vw"  color="primary" routerLink="/survey/list-survey" >Quit</button>
+        </form>
+      </div>
+      <br>
+    </div>
+  </div>
+</div>

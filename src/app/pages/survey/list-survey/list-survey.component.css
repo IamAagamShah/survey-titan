@@ -1,0 +1,44 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 20%;
+}
+
+.mat-column-title {
+  flex: 0 0 30%;
+}
+.mat-column-description {
+  flex: 0 0 30%;
+}
+.mat-column-status {
+  flex: 0 0 10%;
+}
+.mat-column-edit {
+  flex: 0 0 10%;
+}
+.mat-column-remove {
+  flex: 0 0 10%;
+}
+.mat-column-report {
+  flex: 0 0 10%;
+}
+
+.example-card {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80%;
+}
+
+.valign-center
+{
+  display: inline-flex;
+  vertical-align: middle;
+  align-items: center;
+}
